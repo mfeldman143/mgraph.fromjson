@@ -1,6 +1,6 @@
 {
   "name": "mgraph.fromjson",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Library to load graph from simple json format",
   "main": "index.js",
   "module": "dist/mgraph.fromjson.esm.js",
