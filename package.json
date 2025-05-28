@@ -1,0 +1,64 @@
+{
+  "name": "mgraph.fromjson",
+  "version": "1.0.0",
+  "description": "Library to load graph from simple json format",
+  "main": "index.js",
+  "module": "dist/mgraph.fromjson.esm.js",
+  "unpkg": "dist/mgraph.fromjson.umd.min.js",
+  "jsdelivr": "dist/mgraph.fromjson.umd.min.js",
+  "types": "./index.d.ts",
+  "type": "module",
+  "scripts": {
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:ui": "vitest --ui",
+    "build": "rollup -c",
+    "prepublishOnly": "npm run test:run && npm run build"
+  },
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "dist/",
+    "LICENSE",
+    "README.md"
+  ],
+  "keywords": [
+    "mgraph",
+    "serialize",
+    "store",
+    "graph",
+    "load",
+    "json",
+    "fromjson"
+  ],
+  "author": "Michael Feldman",
+  "contributors": [
+    {
+      "name": "Andrei Kashcha",
+      "url": "https://github.com/anvaka",
+      "note": "Original author of ngraph.fromjson"
+    }
+  ],
+  "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mfeldman143/mgraph.fromjson.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mfeldman143/mgraph.fromjson/issues"
+  },
+  "homepage": "https://github.com/mfeldman143/mgraph.fromjson#readme",
+  "dependencies": {
+    "mgraph.graph": "^1.0.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@vitest/ui": "^3.1.4",
+    "rollup": "^4.41.1",
+    "vitest": "^3.1.4"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
