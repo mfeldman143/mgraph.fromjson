@@ -1,3 +1,4 @@
+<!-- README.md -->
 # mgraph.fromjson
 
 Modern JSON graph parser for JavaScript — Load graphs from simple JSON format into mgraph.graph
@@ -17,12 +18,21 @@ This project is **not affiliated with or endorsed by Andrei Kashcha**, and any m
 
 ```bash
 npm install mgraph.fromjson
-Via CDN
-html<script src="https://cdn.jsdelivr.net/npm/mgraph.fromjson/dist/mgraph.fromjson.umd.min.js"></script>
-When loaded from a CDN, the library is available as the global variable mgraphFromJSON.
-Usage
-ES Modules (Recommended)
-javascriptimport fromJSON from 'mgraph.fromjson';
+```
+
+### Via CDN
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/mgraph.fromjson/dist/mgraph.fromjson.umd.min.js"></script>
+```
+When loaded from a CDN, the library is available as the global variable `mgraphFromJSON`.
+
+## Usage
+
+### ES Modules (Recommended)
+
+```javascript
+import fromJSON from 'mgraph.fromjson';
 
 // Simple JSON format
 const jsonString = `{
@@ -39,23 +49,41 @@ const graph = fromJSON(jsonString);
 
 console.log(graph.getNode('hello')); // returns a node
 console.log(graph.getLinksCount());  // 1
-CommonJS
-javascriptconst fromJSON = require('mgraph.fromjson').default;
-TypeScript
-typescriptimport fromJSON from 'mgraph.fromjson';
+```
+
+### CommonJS
+
+```javascript
+const fromJSON = require('mgraph.fromjson').default;
+```
+
+### TypeScript
+
+```typescript
+import fromJSON from 'mgraph.fromjson';
 import { Graph } from 'mgraph.graph';
 
 const graph: Graph = fromJSON(jsonString);
-CDN Usage
-html<script src="https://cdn.jsdelivr.net/npm/mgraph.fromjson/dist/mgraph.fromjson.umd.min.js"></script>
+```
+
+### CDN Usage
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/mgraph.fromjson/dist/mgraph.fromjson.umd.min.js"></script>
 <script>
   const jsonData = '{"nodes":[{"id":"a"}],"links":[]}';
   const graph = mgraphFromJSON(jsonData);
 </script>
-Advanced Usage
-Custom Transform Functions
+```
+
+## Advanced Usage
+
+### Custom Transform Functions
+
 You can provide custom transform functions for more complex data structures:
-javascriptimport fromJSON from 'mgraph.fromjson';
+
+```javascript
+import fromJSON from 'mgraph.fromjson';
 
 // Array-based format
 const jsonData = {
@@ -92,8 +120,12 @@ console.log(node1.data); // "Custom node data"
 
 const link = graph.getLink(1, 2);
 console.log(link.data); // "Custom link data"
-Complex Node Data
-javascriptconst complexGraph = fromJSON(`{
+```
+
+### Complex Node Data
+
+```javascript
+const complexGraph = fromJSON(`{
   "nodes": [
     {
       "id": "user1",
@@ -129,17 +161,26 @@ javascriptconst complexGraph = fromJSON(`{
 
 const alice = complexGraph.getNode('user1');
 console.log(alice.data.skills); // ["JavaScript", "Python", "React"]
-Loading from URLs
-javascriptasync function loadGraphFromURL(url) {
+```
+
+### Loading from URLs
+
+```javascript
+async function loadGraphFromURL(url) {
   const response = await fetch(url);
   const jsonData = await response.text();
   return fromJSON(jsonData);
 }
 
 const graph = await loadGraphFromURL('/api/graph.json');
-Framework Integration
-React
-jsximport { useEffect, useState } from 'react';
+```
+
+## Framework Integration
+
+### React
+
+```jsx
+import { useEffect, useState } from 'react';
 import fromJSON from 'mgraph.fromjson';
 
 function GraphLoader({ jsonData }) {
@@ -166,8 +207,12 @@ function GraphLoader({ jsonData }) {
     </div>
   );
 }
-Vue
-vue<template>
+```
+
+### Vue
+
+```vue
+<template>
   <div v-if="graph">
     <p>Nodes: {{ graph.getNodesCount() }}</p>
     <p>Links: {{ graph.getLinksCount() }}</p>
@@ -187,8 +232,12 @@ watch(() => props.jsonData, (newData) => {
   }
 }, { immediate: true });
 </script>
-Angular
-typescriptimport { Component, Input, OnChanges } from '@angular/core';
+```
+
+### Angular
+
+```typescript
+import { Component, Input, OnChanges } from '@angular/core';
 import fromJSON from 'mgraph.fromjson';
 import { Graph } from 'mgraph.graph';
 
@@ -211,25 +260,40 @@ export class GraphLoaderComponent implements OnChanges {
     }
   }
 }
-API
-fromJSON(jsonString, nodeTransform?, linkTransform?)
+```
+
+## API
+
+### `fromJSON(jsonString, nodeTransform?, linkTransform?)`
+
 Parameters:
 
-jsonString (string | object) - Graph data in JSON format
-nodeTransform (function, optional) - Custom node transformation function
-linkTransform (function, optional) - Custom link transformation function
+- `jsonString` (`string | object`) - Graph data in JSON format
+- `nodeTransform` (`function`, optional) - Custom node transformation function
+- `linkTransform` (`function`, optional) - Custom link transformation function
 
 Returns:
 
-Graph - An mgraph.graph instance loaded with JSON data
+- `Graph` - An `mgraph.graph` instance loaded with JSON data
 
-Node Transform Function:
-typescripttype NodeTransform = (nodeData: any) => { id: any, data?: any }
-Link Transform Function:
-typescripttype LinkTransform = (linkData: any) => { fromId: any, toId: any, data?: any }
-JSON Format
-Standard Format
-json{
+### Node Transform Function:
+
+```typescript
+type NodeTransform = (nodeData: any) => { id: any, data?: any }
+```
+
+### Link Transform Function:
+
+```typescript
+type LinkTransform = (linkData: any) => { fromId: any, toId: any, data?: any }
+```
+
+## JSON Format
+
+### Standard Format
+
+```json
+{
   "nodes": [
     {"id": "node1", "data": "optional node data"},
     {"id": "node2"}
@@ -238,8 +302,12 @@ json{
     {"fromId": "node1", "toId": "node2", "data": "optional link data"}
   ]
 }
-Custom Array Format (with transforms)
-json{
+```
+
+### Custom Array Format (with transforms)
+
+```json
+{
   "nodes": [
     ["node1", {"weight": 5}],
     ["node2", {"weight": 3}]
@@ -248,28 +316,37 @@ json{
     ["node1", "node2", {"distance": 10}]
   ]
 }
-Compatible with mgraph.tojson
-This library is designed to work with JSON output from mgraph.tojson:
-javascriptimport toJSON from 'mgraph.tojson';
+```
+
+## Compatible with mgraph.tojson
+
+This library is designed to work with JSON output from `mgraph.tojson`:
+
+```javascript
+import toJSON from 'mgraph.tojson';
 import fromJSON from 'mgraph.fromjson';
 
 // Round-trip: graph → JSON → graph
 const originalGraph = /* your graph */;
 const jsonString = toJSON(originalGraph);
 const restoredGraph = fromJSON(jsonString);
-Part of the mgraph Ecosystem
+```
 
-mgraph.graph - Core graph data structure
-mgraph.events - Event system
-mgraph.forcelayout - Force-directed layouts
-mgraph.generators - Graph generators
-mgraph.fromdot - DOT file parser
-mgraph.fromjson - JSON parser ← You are here
-mgraph.merge - Object merging utility
-mgraph.random - Seeded random numbers
+## Part of the mgraph Ecosystem
 
-Error Handling
-javascripttry {
+- `mgraph.graph` - Core graph data structure
+- `mgraph.events` - Event system
+- `mgraph.forcelayout` - Force-directed layouts
+- `mgraph.generators` - Graph generators
+- `mgraph.fromdot` - DOT file parser
+- `mgraph.fromjson` - JSON parser ← You are here
+- `mgraph.merge` - Object merging utility
+- `mgraph.random` - Seeded random numbers
+
+## Error Handling
+
+```javascript
+try {
   const graph = fromJSON(invalidJsonString);
 } catch (error) {
   if (error instanceof SyntaxError) {
@@ -278,19 +355,26 @@ javascripttry {
     console.error('Graph parsing error:', error.message);
   }
 }
-Performance
+```
 
-Memory efficient - Streaming JSON parsing for large graphs
-Fast parsing - Optimized for common graph formats
-Type safe - Full TypeScript support with proper type inference
+## Performance
 
-License
-This project is released under the BSD 3-Clause License, in compliance with the original ngraph.fromjson licensing terms. See LICENSE for details.
-Contributing
+- Memory efficient - Streaming JSON parsing for large graphs
+- Fast parsing - Optimized for common graph formats
+- Type safe - Full TypeScript support with proper type inference
+
+## License
+
+This project is released under the BSD 3-Clause License, in compliance with the original `ngraph.fromjson` licensing terms. See `LICENSE` for details.
+
+## Contributing
+
 Issues and pull requests are welcome on GitHub.
-Credits
-Original ngraph.fromjson by Andrei Kashcha.
-Modern mgraph.fromjson maintained by Michael Feldman.
+
+## Credits
+
+Original `ngraph.fromjson` by Andrei Kashcha.
+Modern `mgraph.fromjson` maintained by Michael Feldman.
 
 This README provides comprehensive documentation with:
 - ✅ Modern ES module examples
@@ -299,6 +383,5 @@ This README provides comprehensive documentation with:
 - ✅ Advanced usage patterns
 - ✅ Complete API documentation
 - ✅ Error handling guidance
-- ✅ Performance notes
 - ✅ Ecosystem integration
 - ✅ Proper attribution and licensing
